@@ -28,6 +28,8 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
+            ->font('Nova Square')
+            ->brandName('Dourado Dev')
             ->login()
             ->colors([
                 'primary' => Color::Amber,
