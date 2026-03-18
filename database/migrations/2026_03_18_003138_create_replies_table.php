@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -18,7 +19,7 @@ return new class extends Migration
             $table->text('content');
             $table->foreignId('user_id')->constrained()->cascadeOnDelete()->unsigned();
             $table->foreignId('comment_id')->constrained()->cascadeOnDelete()->unsigned();
-            $table->timestamp('created_at');
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->onUpdate('current_timestamp');
         });
 
