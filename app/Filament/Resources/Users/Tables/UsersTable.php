@@ -10,6 +10,8 @@ use Filament\Actions\DeleteAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Support\Icons\Heroicon;
+use Filament\Actions\Action;
+use Filament\Actions\ActionGroup;
 use Filament\Tables\Table;
 
 class UsersTable
@@ -60,9 +62,11 @@ class UsersTable
                 //
             ])
             ->recordActions([
-                // ViewAction::make(),
-                EditAction::make(),
-                DeleteAction::make(),
+                ActionGroup::make([
+                    ViewAction::make()->icon(Heroicon::OutlinedEye),
+                    EditAction::make()->color('primary')->icon(Heroicon::OutlinedPencil),
+                    DeleteAction::make()->color('danger')->icon(Heroicon::OutlinedTrash),
+                ]),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
