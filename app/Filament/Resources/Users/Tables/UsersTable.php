@@ -27,9 +27,7 @@ class UsersTable
 
                 IconColumn::make('is_admin')
                     ->label('Admin?')
-                    ->boolean()
-                    ->trueIcon(Heroicon::OutlinedCheckBadge)
-                    ->falseIcon(Heroicon::OutlinedXMark),
+                    ->boolean(),
                 
                 TextColumn::make('email_verified_at')
                     ->label('Email verificado em')
