@@ -9,6 +9,7 @@ use Filament\Actions\ViewAction;
 use Filament\Actions\DeleteAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\IconColumn;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 
 class UsersTable
@@ -26,12 +27,9 @@ class UsersTable
 
                 IconColumn::make('is_admin')
                     ->label('Admin?')
-                    ->icon(function ($state) {
-                        return $state ? 'heroicon-o-check-circle' : 'heroicon-o-x-circle';
-                    })
-                    ->color(function ($state) {
-                        return $state ? 'success' : 'danger';
-                    }),
+                    ->boolean()
+                    ->trueIcon(Heroicon::OutlinedCheckBadge)
+                    ->falseIcon(Heroicon::OutlinedXMark),
                 
                 TextColumn::make('email_verified_at')
                     ->label('Email verificado em')
