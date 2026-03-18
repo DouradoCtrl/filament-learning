@@ -9,6 +9,7 @@ use Filament\Actions\ViewAction;
 use Filament\Actions\DeleteAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Support\Icons\Heroicon;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
@@ -20,9 +21,15 @@ class UsersTable
     {
         return $table
             ->columns([
+                ImageColumn::make('avatar')
+                    ->label('Avatar')
+                    ->circular(),
+                    
                 TextColumn::make('name')
                     ->label('Nome')
                     ->searchable(),
+
+
                 TextColumn::make('email')
                     ->label('E-mail')
                     ->searchable(),
