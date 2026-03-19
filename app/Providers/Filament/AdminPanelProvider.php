@@ -31,6 +31,7 @@ class AdminPanelProvider extends PanelProvider
             ->font('Nova Square')
             ->brandName('Dourado Dev')
             ->login()
+            ->profile()
             ->colors([
                 'primary' => Color::Indigo,
             ])
