@@ -21,6 +21,10 @@ class UserInfolist
                     ->label('Name'),
                 TextEntry::make('email')
                     ->label('Endereço de e-mail'),
+                TextEntry::make('email_verified_at')
+                    ->label('Email verificado em')
+                    ->dateTime()
+                    ->placeholder('-'),
                 TextEntry::make('phone')
                     ->label('Telefone'),
                 IconEntry::make('is_admin')
@@ -28,7 +32,10 @@ class UserInfolist
                     ->boolean(),
                 TextEntry::make('comments_count')
                     ->label('Número de comentários')
-                    ->counts('comments'),   
+                    ->counts('comments'),
+                TextEntry::make('posts_count')
+                    ->label('Número de posts')
+                    ->counts('posts'),   
                 TextEntry::make('created_at')
                     ->label("Criado em")
                     ->dateTime()
