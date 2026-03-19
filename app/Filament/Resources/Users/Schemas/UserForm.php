@@ -52,6 +52,7 @@ class UserForm
                 FileUpload::make('avatar')
                     ->label('Anexo')
                     ->avatar()
+                    ->imageEditor()
                     ->directory('avatars')
                     ->helperText('Faça o upload da imagem de perfil do usuário.'),
             ]);
