@@ -37,7 +37,8 @@ class UserForm
                     ->rules(['required'])
                     ->password()
                     ->placeholder('Senha do usuário')
-                    ->required(),
+                    ->required()
+                    ->visibleOn(['create']),
 
                 TextInput::make('phone')
                     ->label('Telefone')
@@ -50,7 +51,7 @@ class UserForm
 
                 FileUpload::make('avatar')
                     ->label('Anexo')
-                    ->image()
+                    ->avatar()
                     ->directory('avatars')
                     ->helperText('Faça o upload da imagem de perfil do usuário.'),
             ]);
