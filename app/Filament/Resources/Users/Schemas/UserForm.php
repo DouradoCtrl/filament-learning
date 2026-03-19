@@ -17,11 +17,10 @@ class UserForm
         return $schema
             ->components([
                 Section::make('Informações do usuário')
-                    ->description(function ($operation) {
-                        if ($operation === 'create') {
-                            return 'Preencha as informações para criar um novo usuário.';
-                        }
-                        return 'Atualize as informações do usuário conforme necessário.';
+                    ->description(fn ($operation) => match ($operation) {
+                        'create' => 'Crie um novo usuário preenchendo as informações abaixo.',
+                        'edit' => 'Edite as informações do usuário conforme necessário.',
+                        default => null,
                     })
                     ->columns(2)
                     ->columnSpanFull()
