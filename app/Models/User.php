@@ -8,16 +8,16 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Filament\Models\Contracts\FilamentUser;
-use Filament\Models\Contracts\HasAvatar;
+// use Filament\Models\Contracts\HasAvatar;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Filament\Panel;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
-
+// use Illuminate\Support\Facades\Storage;
+// use Illuminate\Support\Str;
+//implements HasAvatar
 #[Fillable(['name', 'email', 'is_admin', 'phone', 'avatar', 'password'])]
 #[Hidden(['password', 'remember_token'])]
-class User extends Authenticatable implements HasAvatar
+class User extends Authenticatable 
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
@@ -50,8 +50,8 @@ class User extends Authenticatable implements HasAvatar
         return $this->hasMany(Reply::class);
     }
 
-    public function getFilamentAvatarUrl(): ?string
-    {
-        return $this->avatar;
-    }
+    // public function getFilamentAvatarUrl(): ?string
+    // {
+    //     return $this->avatar;
+    // }
 }
