@@ -21,6 +21,7 @@ return new class extends Migration
             $table->text('content');
             $table->foreignId('user_id')->constrained()->cascadeOnDelete()->unsigned();
             $table->foreignId('tag_id')->nullable()->constrained()->unsigned();
+            $table->foreignId('category_id')->nullable()->constrained()->unsigned();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->onUpdate('current_timestamp');
         });
