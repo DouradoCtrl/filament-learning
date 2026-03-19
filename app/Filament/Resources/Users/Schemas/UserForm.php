@@ -7,6 +7,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\FileUpload;
 use Filament\Schemas\Components\Section;
+use Filament\Support\Icons\Heroicon;
 use Filament\Schemas\Schema;
 
 class UserForm
@@ -16,7 +17,12 @@ class UserForm
         return $schema
             ->components([
                 Section::make('Informações do usuário')
-                    ->description('Dados principais do usuário.')
+                    ->description(function ($operation) {
+                        if ($operation === 'create') {
+                            return 'Preencha as informações para criar um novo usuário.';
+                        }
+                        return 'Atualize as informações do usuário conforme necessário.';
+                    })
                     ->columns(2)
                     ->columnSpanFull()
                     ->collapsible()
