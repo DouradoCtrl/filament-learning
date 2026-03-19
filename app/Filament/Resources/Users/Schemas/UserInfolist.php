@@ -28,7 +28,7 @@ class UserInfolist
                     ->boolean(),
                 TextEntry::make('comments_count')
                     ->label('Número de comentários')
-                    ->counts('comments'),
+                    ->counts('comments'),   
                 TextEntry::make('created_at')
                     ->label("Criado em")
                     ->dateTime()
