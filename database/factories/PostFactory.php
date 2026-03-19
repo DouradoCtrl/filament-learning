@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Tag;
 use App\Models\User;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class PostFactory extends Factory
@@ -19,6 +20,7 @@ class PostFactory extends Factory
             'content' => fake()->paragraphs(3, true),
             'user_id' => User::factory(),
             'tag_id' => Tag::factory(),
+            'category_id' => Category::factory(),
             'created_at' => fake()->dateTime(),
             'updated_at' => fake()->dateTime(),
         ];
