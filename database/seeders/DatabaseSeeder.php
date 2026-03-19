@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Post;
 use App\Models\Tag;
+use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Reply;
 
@@ -21,7 +22,12 @@ class DatabaseSeeder extends Seeder
     {
         $users = User::factory(10)->create();
         $tags = Tag::factory(10)->create();
-        $posts = Post::factory(10)->recycle($users)->recycle($tags)->create();
+        $categories = Category::factory(10)->create();
+        $posts = Post::factory(10)
+        ->recycle($users)
+        ->recycle($tags)
+        ->recycle($categories)
+        ->create();
         $comments = Comment::factory(10)->recycle($users)->recycle($posts)->create();
         Reply::factory(10)->recycle($users)->recycle($comments)->create();
 
