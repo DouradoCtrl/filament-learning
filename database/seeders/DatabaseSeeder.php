@@ -20,8 +20,8 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $users = User::factory(10)->create();
-        $tags = Post::factory(10)->create();
-        $posts = Tag::factory(10)->recycle($users)->recycle($tags)->create();
+        $tags = Tag::factory(10)->create();
+        $posts = Post::factory(10)->recycle($users)->recycle($tags)->create();
         $comments = Comment::factory(10)->recycle($users)->recycle($posts)->create();
         Reply::factory(10)->recycle($users)->recycle($comments)->create();
 
