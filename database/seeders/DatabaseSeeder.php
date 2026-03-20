@@ -21,11 +21,10 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $users = User::factory(10)->create();
-        $tags = Tag::factory(10)->create();
+        Tag::factory(10)->create();
         $categories = Category::factory(10)->create();
         $posts = Post::factory(10)
         ->recycle($users)
-        ->recycle($tags)
         ->recycle($categories)
         ->create();
         $comments = Comment::factory(10)->recycle($users)->recycle($posts)->create();
