@@ -23,7 +23,7 @@ class CategoryFactory extends Factory
         $faker->addProvider(new Commerce($faker));
 
         return [
-            'name' => $faker->department,
+            'name' => $faker->unique()->department,
         ];
     }
 }
