@@ -9,6 +9,7 @@ use Filament\Schemas\Schema;
 use Filament\Schemas\Components\Section;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\TagsInput;
 use App\Models\Category;
 use App\Models\User;
 
@@ -96,6 +97,8 @@ class PostForm
                             ->preload()
                             ->searchable()
                             ->relationship('tags', 'tag_name'),
+                        // TagsInput::make('tags')
+                        //     ->label('Tags')  
                 ])->columnSpanFull(),
                 Section::make('Configurações de publicação')
                     ->description(function ($operation) {
