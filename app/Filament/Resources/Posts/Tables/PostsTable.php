@@ -9,6 +9,7 @@ use Filament\Actions\ViewAction;
 use Filament\Actions\DeleteAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Filament\Actions\Action;
@@ -20,18 +21,21 @@ class PostsTable
     {
         return $table
             ->columns([
+                ImageColumn::make('thumbnail')
+                    //arredondar as bordas da imagem,
+                    ->label('Thumbnail'),
                 TextColumn::make('title')
                     ->label('Título')
                     ->searchable()
                     ->sortable()
                     ->limit(20),
-                TextColumn::make('category.name')
-                    ->label('Categoria')
-                    ->searchable()
-                    ->sortable(),
                 IconColumn::make('is_published')
                     ->label('Publicado?')
                     ->boolean()
+                    ->sortable(),
+                TextColumn::make('category.name')
+                    ->label('Categoria')
+                    ->searchable()
                     ->sortable(),
                 TextColumn::make('user.name')
                     ->label('Autor')
