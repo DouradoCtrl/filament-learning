@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Bezhanov\Faker\Provider\Commerce;
+use Faker\Factory as Faker;
 
 class TagFactory extends Factory
 {
@@ -11,10 +13,12 @@ class TagFactory extends Factory
      */
     public function definition(): array
     {
+        $faker = Faker::create();
+        $faker->addProvider(new Commerce($faker));
         return [
-            'tag_name' => fake()->regexify('[A-Za-z0-9]{10}'),
-            'created_at' => fake()->dateTime(),
-            'updated_at' => fake()->dateTime(),
+            'tag_name' => strtolower($faker->unique()->department()),
+            'created_at' => $faker->dateTime(),
+            'updated_at' => $faker->dateTime(),
         ];
     }
 }
