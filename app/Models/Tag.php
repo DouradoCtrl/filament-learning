@@ -35,6 +35,7 @@ class Tag extends Model
     {
         return [
             'id' => 'integer',
+            'tag_name' => 'string',
             'created_at' => 'timestamp',
             'updated_at' => 'timestamp',
         ];
