@@ -1,7 +1,7 @@
 @php
     $brandName = filament()->getBrandName();
     $brandLogo = filament()->getBrandLogo();
-    $brandLogoHeight = filament()->getBrandLogoHeight() ?? '3rem';
+    $brandLogoHeight = filament()->getBrandLogoHeight() ?? '2.8rem';
     $darkModeBrandLogo = filament()->getDarkModeBrandLogo();
     $hasDarkModeBrandLogo = filled($darkModeBrandLogo);
 
