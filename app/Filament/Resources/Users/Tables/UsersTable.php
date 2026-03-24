@@ -23,16 +23,17 @@ class UsersTable
             ->columns([
                 ImageColumn::make('avatar')
                     ->label('Avatar')
-                    ->circular(),
+                    ->circular()
+                    ->visibleFrom('md'),
                     
                 TextColumn::make('name')
                     ->label('Nome')
                     ->searchable(),
 
-
                 TextColumn::make('email')
                     ->label('E-mail')
-                    ->searchable(),
+                    ->searchable()
+                    ->visibleFrom('md'),
 
                 IconColumn::make('is_admin')
                     ->label('Admin?')
@@ -46,6 +47,7 @@ class UsersTable
 
                 TextColumn::make('phone')
                     ->label('Telefone')
+                    ->visibleFrom('md')
                     ->toggleable(isToggledHiddenByDefault: true),
 
                 TextColumn::make('created_at')
@@ -64,6 +66,7 @@ class UsersTable
                 TextColumn::make('comments_count')
                     ->label('Comentários')
                     ->counts('comments')
+                    ->visibleFrom('md'),
             ])
             ->filters([
                 //
