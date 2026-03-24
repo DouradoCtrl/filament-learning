@@ -38,7 +38,12 @@ class PostsTable
 
                 TextColumn::make('tags.tag_name')
                     ->label('Tags')
-                    ->badge(),
+                    ->badge()
+                    ->color(function ($state) {
+                        if (in_array($state, ['shoes', 'clothing'])) {
+                            return 'success';
+                        }
+                    }),
 
                 ToggleColumn::make('is_published')
                     ->label('Publicado?')
