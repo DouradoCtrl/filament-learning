@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Posts\Tables;
 
+use App\Models\Category;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -16,6 +17,7 @@ use App\Models\Post;
 use Illuminate\Support\Str;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
+use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Columns\ToggleColumn;
 
 class PostsTable
@@ -48,10 +50,13 @@ class PostsTable
                 ToggleColumn::make('is_published')
                     ->label('Publicado?')
                     ->sortable(),
-                TextColumn::make('category.name')
+
+                SelectColumn::make('category_id')
                     ->label('Categoria')
                     ->searchable()
+                    ->options(Category::pluck('name', 'id'))
                     ->sortable(),
+
                 TextColumn::make('user.name')
                     ->label('Autor')
                     ->searchable()
@@ -81,6 +86,6 @@ class PostsTable
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])->striped();
     }
 }
