@@ -12,8 +12,11 @@ use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use App\Models\Post;
+use Illuminate\Support\Str;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
+use Filament\Tables\Columns\ToggleColumn;
 
 class PostsTable
 {
@@ -27,11 +30,18 @@ class PostsTable
                 TextColumn::make('title')
                     ->label('Título')
                     ->searchable()
-                    ->sortable()
-                    ->limit(20),
-                IconColumn::make('is_published')
+                    ->wrap()
+                    ->description(function (Post $record) {
+                        return Str::of($record->content)->limit(50);
+                    })
+                    ->sortable(),
+
+                TextColumn::make('tags.tag_name')
+                    ->label('Tags')
+                    ->badge(),
+
+                ToggleColumn::make('is_published')
                     ->label('Publicado?')
-                    ->boolean()
                     ->sortable(),
                 TextColumn::make('category.name')
                     ->label('Categoria')
