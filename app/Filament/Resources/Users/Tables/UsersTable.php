@@ -69,10 +69,7 @@ class UsersTable
                     ->label('Comentários')
                     ->badge()
                     ->color(function ($state): string {
-                        if ($state >= 2) {
-                            return 'success';
-                        }
-                        return 'danger';
+                        return ($state >= 2) ? 'success' : 'danger';
                     })
                     ->counts('comments')
                     ->visibleFrom('md'),
