@@ -8,6 +8,8 @@ use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Actions\DeleteAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\TextInputColumn;
+use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Support\Icons\Heroicon;
@@ -26,7 +28,8 @@ class UsersTable
                     ->circular()
                     ->visibleFrom('md'),
                     
-                TextColumn::make('name')
+                TextInputColumn::make('name')
+                    ->rules(['required'])
                     ->label('Nome')
                     ->searchable(),
 
@@ -35,9 +38,8 @@ class UsersTable
                     ->searchable()
                     ->visibleFrom('md'),
 
-                IconColumn::make('is_admin')
-                    ->label('Admin?')
-                    ->boolean(),
+                ToggleColumn::make('is_admin')
+                    ->label('Admin?'),
                 
                 TextColumn::make('email_verified_at')
                     ->label('Email verificado em')
@@ -65,6 +67,13 @@ class UsersTable
 
                 TextColumn::make('comments_count')
                     ->label('Comentários')
+                    ->badge()
+                    ->color(function ($state): string {
+                        if ($state >= 2) {
+                            return 'success';
+                        }
+                        return 'danger';
+                    })
                     ->counts('comments')
                     ->visibleFrom('md'),
             ])
