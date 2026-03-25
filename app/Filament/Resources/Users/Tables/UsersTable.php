@@ -28,7 +28,7 @@ class UsersTable
     {
         return $table
             ->filtersTriggerAction(function (Action $action) {
-                return $action->button()->label('Filtrar');
+                return $action->button()->label('Filtrar usuários');
             })
             ->filtersFormWidth(Width::FourExtraLarge)
             ->columns([
