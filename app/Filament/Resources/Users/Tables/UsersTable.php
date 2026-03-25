@@ -21,12 +21,28 @@ use Filament\Support\Enums\Width;
 use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\SelectFilter;
 use App\Models\User;
+use App\Filament\Exports\UserExporter;
+use Filament\Actions\ExportAction;
+use Filament\Actions\Exports\Enums\ExportFormat;
+use Filament\Actions\Exports\Models\Export;
 
 class UsersTable
 {
     public static function configure(Table $table): Table
     {
         return $table
+            ->headerActions([
+                ExportAction::make()
+                    ->label('Relatório')
+                    ->icon(Heroicon::OutlinedArrowDownOnSquare)
+                    ->exporter(UserExporter::class)
+                    ->fileName(fn (Export $export): string => "users-{$export->getKey()}")
+                    ->formats([
+                        ExportFormat::Xlsx,
+                        ExportFormat::Csv,
+                    ])
+                    ->slideOver(),
+                ])
             ->filtersTriggerAction(function (Action $action) {
                 return $action->button()->label('Filtrar usuários');
             })
