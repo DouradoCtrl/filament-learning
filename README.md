@@ -1,3 +1,82 @@
+# Instalação e Setup do Projeto
+
+## 1. Pré-requisitos
+
+- Docker e Docker Compose instalados
+- PHP 8.1+ instalado na máquina (fora do Docker)
+- Composer instalado
+
+## 2. Subindo o Banco de Dados e Adminer
+
+Execute o comando abaixo para subir o banco de dados PostgreSQL e o Adminer:
+
+```bash
+docker compose -f docker-compose.dev.yaml up -d --build
+```
+
+O banco ficará disponível para a aplicação e o Adminer estará em http://localhost:8080.
+
+## 3. Instalando as dependências PHP
+
+```bash
+composer install
+```
+
+## 4. Configurando o ambiente
+
+- Copie o arquivo `.env.example` para `.env` (se necessário)
+- Ajuste as variáveis de ambiente conforme necessário (especialmente DB_HOST, DB_PORT, DB_DATABASE, DB_USERNAME, DB_PASSWORD)
+- Gere a chave da aplicação:
+
+```bash
+php artisan key:generate
+```
+
+## 5. Rodando as migrations
+
+Você pode rodar todas as migrations de uma vez:
+
+```bash
+php artisan migrate
+```
+
+Ou seguir a ordem sugerida abaixo para rodar migrations específicas:
+
+```
+# 1. Tabelas Base do Laravel
+php artisan migrate --path=database/migrations/0001_01_01_000000_create_users_table.php && \
+php artisan migrate --path=database/migrations/0001_01_01_000001_create_cache_table.php && \
+php artisan migrate --path=database/migrations/0001_01_01_000002_create_jobs_table.php && \
+
+# 2. Tabelas Base do Sistema (Indispensáveis para os Posts)
+php artisan migrate --path=database/migrations/2026_03_19_175741_create_categories_table.php && \
+php artisan migrate --path=database/migrations/2026_03_18_003136_create_tags_table.php && \
+
+# 3. Conteúdo Principal (Depende de Categories)
+php artisan migrate --path=database/migrations/2026_03_18_003135_create_posts_table.php && \
+
+# 4. Relacionamentos e Interações (Dependem de Posts e Tags)
+php artisan migrate --path=database/migrations/2026_03_18_003139_create_post_tag_table.php && \
+php artisan migrate --path=database/migrations/2026_03_18_003137_create_comments_table.php && \
+php artisan migrate --path=database/migrations/2026_03_18_003138_create_replies_table.php && \
+
+# 5. Tabelas de Sistema e Utilitários
+php artisan migrate --path=database/migrations/2026_03_25_182803_create_notifications_table.php && \
+php artisan migrate --path=database/migrations/2026_03_25_182804_create_imports_table.php && \
+php artisan migrate --path=database/migrations/2026_03_25_182805_create_exports_table.php && \
+php artisan migrate --path=database/migrations/2026_03_25_182806_create_failed_import_rows_table.php
+```
+
+## 6. Rodando a aplicação
+
+```bash
+php artisan serve
+```
+
+O sistema estará disponível em http://localhost:8000 (ou porta definida em APP_URL).
+
+---
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
