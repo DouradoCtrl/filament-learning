@@ -1,0 +1,22 @@
+# Use postgres/example user/password credentials
+
+services:
+
+  db:
+    image: postgres
+    restart: always
+    shm_size: 128mb
+    environment:
+      POSTGRES_PASSWORD: filament-secret
+      POSTGRES_USER: filament
+      POSTGRES_DB: filament
+    ports:
+      - 5432:5432
+
+
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
