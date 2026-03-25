@@ -15,6 +15,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 
 class UserResource extends Resource
 {
@@ -28,10 +29,21 @@ class UserResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
-    // public static function getGloballySearchableAttributes(): array
-    // {
-    //     return ['name', 'email', 'phone'];
-    // }
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['name', 'email'];
+    }
+
+    public static function getGlobalSearchResultDetails(Model $record): array
+    {
+        return [
+            'Nome' => $record->name,
+            'Email' => $record->email,
+        ];
+    }
+
+
+
 
     public static function form(Schema $schema): Schema
     {
