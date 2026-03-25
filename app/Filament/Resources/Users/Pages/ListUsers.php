@@ -16,7 +16,7 @@ class ListUsers extends ListRecords
     {
         return [
             'Todos' => Tab::make()
-                ->icon(Heroicon::OutlinedDocument)
+                ->icon(Heroicon::OutlinedUserGroup)
                 ->badge(function () {
                     return static::getModel()::count();
                 })
@@ -25,17 +25,17 @@ class ListUsers extends ListRecords
                 ->query(function ($query) {
                     return $query->where('is_admin', true);
                 })
-                ->icon(Heroicon::OutlinedCheckCircle)
+                ->icon(Heroicon::OutlinedShieldCheck)
                 ->badge(function () {
                      return static::getModel()::where('is_admin', true)->count();
                 })
                 ->badgeColor('success')
                 ,
-            'Usuário' => Tab::make()
+            'Usuários' => Tab::make()
                 ->query(function ($query) {
                     return $query->where('is_admin', false);
                 })
-                ->icon(Heroicon::OutlinedXCircle)
+                ->icon(Heroicon::OutlinedUsers)
                 ->badge(function (){
                      return static::getModel()::where('is_admin', false)->count();
                 })
