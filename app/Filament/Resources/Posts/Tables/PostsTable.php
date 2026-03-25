@@ -97,7 +97,14 @@ class PostsTable
                     ->preload()
                     ->multiple()
                     ->searchable()
-                    ->relationship('user', 'name')
+                    ->relationship('user', 'name'),
+
+                SelectFilter::make('category_id')
+                    ->label('Categoria')
+                    ->preload()
+                    ->multiple()
+                    ->searchable()
+                    ->relationship('category', 'name'),
             ], layout: FiltersLayout::AboveContentCollapsible)
             ->recordActions([
                 ActionGroup::make([
