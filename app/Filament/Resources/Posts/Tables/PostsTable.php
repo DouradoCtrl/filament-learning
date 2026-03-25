@@ -17,14 +17,21 @@ use App\Models\Post;
 use Illuminate\Support\Str;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
+use Filament\Support\Enums\Width;
 use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Columns\ToggleColumn;
+use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Filters\TernaryFilter;
 
 class PostsTable
 {
     public static function configure(Table $table): Table
     {
         return $table
+            ->filtersTriggerAction(function (Action $action) {
+                return $action->button()->label('Filtrar posts');
+            })
+            ->filtersFormWidth(Width::FourExtraLarge)
             ->columns([
                 ImageColumn::make('thumbnail')
                     //arredondar as bordas da imagem,
@@ -73,7 +80,22 @@ class PostsTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                // TernaryFilter::make('is_published')
+                //     ->label('Publicado?'),
+
+                SelectFilter::make('is_published')
+                    ->label('Publicado?')
+                    ->searchable()
+                    ->options([
+                        1 => 'Sim',
+                        0 => 'Não',
+                    ]),
+
+                SelectFilter::make('user_id')
+                    ->label('Autor')
+                    ->preload()
+                    ->searchable()
+                    ->relationship('user', 'name')
             ])
             ->recordActions([
                 ActionGroup::make([
