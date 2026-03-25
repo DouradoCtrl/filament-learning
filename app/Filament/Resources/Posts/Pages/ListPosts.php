@@ -18,7 +18,11 @@ class ListPosts extends ListRecords
     {
         return [
             'Todos' => Tab::make()
-                ->icon(Heroicon::OutlinedDocument),
+                ->icon(Heroicon::OutlinedDocument)
+                ->badge(function () {
+                    return static::getModel()::count();
+                })
+                ->badgeColor('primary'),
             'Publicados' => Tab::make()
                 ->query(function ($query) {
                     return $query->where('is_published', true);
@@ -37,7 +41,7 @@ class ListPosts extends ListRecords
                 ->badge(function (){
                      return static::getModel()::where('is_published', false)->count();
                 })
-                ->badgeColor('danger')
+                ->badgeColor('warning')
         ];
     }
 
