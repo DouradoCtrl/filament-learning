@@ -29,13 +29,14 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->font('Nova Square')
+            ->globalSearchKeyBindings(['command+k', 'ctrl+k'])
             ->favicon(asset('favicon.svg'))
             ->brandLogo(asset('images/logo.svg'))
-            ->brandName('Dourado Dev')
+            ->brandName('dourado.ti')
             ->login()
             ->profile()
             ->colors([
-                'primary' => Color::Yellow,
+                'primary' => Color::Amber,
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
