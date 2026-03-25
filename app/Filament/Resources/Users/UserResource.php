@@ -25,7 +25,7 @@ class UserResource extends Resource
 
     protected static ?int $navigationSort = 1;
 
-    protected static ?string $modelLabel = 'Usuários';
+    protected static ?string $navigationLabel = 'Usuários';
 
     protected static ?string $recordTitleAttribute = 'name';
 
@@ -41,9 +41,6 @@ class UserResource extends Resource
             'Email' => $record->email,
         ];
     }
-
-
-
 
     public static function form(Schema $schema): Schema
     {
@@ -79,6 +76,6 @@ class UserResource extends Resource
 
     public static function getNavigationBadge(): ?string
     {
-        return (string) User::count();
+        return static::getModel()::count();
     }
 }
