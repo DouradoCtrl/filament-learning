@@ -15,6 +15,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 
 class PostResource extends Resource
 {
@@ -28,6 +29,14 @@ class PostResource extends Resource
     public static function getGloballySearchableAttributes(): array
     {
         return ['title', 'slug', 'category.name', 'user.name'];
+    }
+
+    public static function getGlobalSearchResultDetails(Model $record): array
+    {
+        return [
+            'Autor' => $record->user->name,
+            'Categoria' => $record->category->name,
+        ];
     }
 
     public static function form(Schema $schema): Schema
