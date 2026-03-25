@@ -84,8 +84,16 @@ class UsersTable
                     ->visibleFrom('md'),
             ])
             ->filters([
-                TernaryFilter::make('is_admin')
-                    ->label('Administrador?'),
+                // TernaryFilter::make('is_admin')
+                //     ->label('Publicado?'),
+
+                SelectFilter::make('is_admin')
+                    ->label('Administrador?')
+                    ->searchable()
+                    ->options([
+                        1 => 'Sim',
+                        0 => 'Não',
+                    ]),
                 SelectFilter::make('id')
                     ->label('Nome')
                     ->searchable()
