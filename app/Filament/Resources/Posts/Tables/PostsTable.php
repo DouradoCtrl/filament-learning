@@ -22,6 +22,7 @@ use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
+use Filament\Tables\Enums\FiltersLayout;
 
 class PostsTable
 {
@@ -68,16 +69,16 @@ class PostsTable
                     ->label('Autor')
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('created_at')
-                    ->label('Criado em')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->label('Atualizado em')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                // TextColumn::make('created_at')
+                //     ->label('Criado em')
+                //     ->dateTime()
+                //     ->sortable()
+                //     ->toggleable(isToggledHiddenByDefault: true),
+                // TextColumn::make('updated_at')
+                //     ->label('Atualizado em')
+                //     ->dateTime()
+                //     ->sortable()
+                //     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 // TernaryFilter::make('is_published')
@@ -94,9 +95,10 @@ class PostsTable
                 SelectFilter::make('user_id')
                     ->label('Autor')
                     ->preload()
+                    ->multiple()
                     ->searchable()
                     ->relationship('user', 'name')
-            ])
+            ], layout: FiltersLayout::AboveContentCollapsible)
             ->recordActions([
                 ActionGroup::make([
                     ViewAction::make()->icon(Heroicon::OutlinedEye)->label('Visualizar post'),
