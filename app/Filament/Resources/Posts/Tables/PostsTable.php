@@ -108,8 +108,15 @@ class PostsTable
             ], layout: FiltersLayout::AboveContentCollapsible)
             ->recordActions([
                 ActionGroup::make([
-                    ViewAction::make()->icon(Heroicon::OutlinedEye)->label('Visualizar post'),
-                    EditAction::make()->color('primary')->icon(Heroicon::OutlinedPencil)->label('Editar publicação'),
+                    ViewAction::make()
+                        ->slideOver()
+                        ->icon(Heroicon::OutlinedEye)
+                        ->label('Visualizar post'),
+                    EditAction::make()
+                        ->slideOver()   
+                        ->color('primary')
+                        ->icon(Heroicon::OutlinedPencil)
+                        ->label('Editar publicação'),
                     DeleteAction::make()->color('danger')->icon(Heroicon::OutlinedTrash)->label('Deletar publicação'),
                 ]),
             ])
