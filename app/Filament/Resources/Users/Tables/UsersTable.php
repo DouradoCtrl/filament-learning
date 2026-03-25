@@ -84,13 +84,14 @@ class UsersTable
                     ->visibleFrom('md'),
             ])
             ->filters([
-                TernaryFilter::make('is_admin'),
+                TernaryFilter::make('is_admin')
+                    ->label('Administrador?'),
                 SelectFilter::make('id')
                     ->label('Nome')
                     ->searchable()
                     ->multiple()
                     ->options(User::pluck('name', 'id')),
-            ], layout: FiltersLayout::Modal)
+            ])
             ->recordActions([
                 ActionGroup::make([
                     ViewAction::make()->icon(Heroicon::OutlinedEye)->label('Visualizar usuário'),
