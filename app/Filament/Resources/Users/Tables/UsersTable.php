@@ -76,6 +76,7 @@ class UsersTable
                 TextColumn::make('comments_count')
                     ->label('Comentários')
                     ->badge()
+                    ->icon(Heroicon::OutlinedChatBubbleOvalLeft)
                     ->color(function ($state): string {
                         return ($state >= 2) ? 'success' : 'danger';
                     })
