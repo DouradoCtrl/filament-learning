@@ -23,12 +23,28 @@ use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Enums\FiltersLayout;
+use App\Filament\Exports\PostExporter;
+use Filament\Actions\ExportAction;
+use Filament\Actions\Exports\Enums\ExportFormat;
+use Filament\Actions\Exports\Models\Export;
 
 class PostsTable
 {
     public static function configure(Table $table): Table
     {
         return $table
+            ->headerActions([
+                ExportAction::make()
+                    ->label('Relatório')
+                    ->icon(Heroicon::OutlinedArrowDownOnSquare)
+                    ->exporter(PostExporter::class)
+                    ->fileName(fn (Export $export): string => "post-{$export->getKey()}")
+                    ->formats([
+                        ExportFormat::Xlsx,
+                        ExportFormat::Csv,
+                    ])
+                    ->slideOver(),
+                ])
             ->filtersTriggerAction(function (Action $action) {
                 return $action->button()->label('Filtrar posts');
             })
