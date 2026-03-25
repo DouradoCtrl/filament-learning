@@ -16,20 +16,28 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
 use Filament\Tables\Table;
+use Filament\Tables\Filters\TernaryFilter;
+use Filament\Support\Enums\Width;
+use Filament\Tables\Enums\FiltersLayout;
+use Filament\Tables\Filters\SelectFilter;
+use App\Models\User;
 
 class UsersTable
 {
     public static function configure(Table $table): Table
     {
         return $table
+            ->filtersTriggerAction(function (Action $action) {
+                return $action->button()->label('Filtrar');
+            })
+            ->filtersFormWidth(Width::FourExtraLarge)
             ->columns([
                 ImageColumn::make('avatar')
                     ->label('Avatar')
                     ->circular()
                     ->visibleFrom('md'),
                     
-                TextInputColumn::make('name')
-                    ->rules(['required'])
+                TextColumn::make('name')
                     ->label('Nome')
                     ->searchable(),
 
@@ -75,8 +83,13 @@ class UsersTable
                     ->visibleFrom('md'),
             ])
             ->filters([
-                //
-            ])
+                TernaryFilter::make('is_admin'),
+                SelectFilter::make('id')
+                    ->label('Nome')
+                    ->searchable()
+                    ->multiple()
+                    ->options(User::pluck('name', 'id')),
+            ], layout: FiltersLayout::Modal)
             ->recordActions([
                 ActionGroup::make([
                     ViewAction::make()->icon(Heroicon::OutlinedEye)->label('Visualizar usuário'),
