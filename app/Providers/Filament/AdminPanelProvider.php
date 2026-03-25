@@ -18,6 +18,8 @@ use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Filament\Navigation\NavigationGroup;
+use Filament\Support\Icons\Heroicon;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -35,6 +37,11 @@ class AdminPanelProvider extends PanelProvider
             ->brandName('dourado.ti')
             ->login()
             ->profile()
+            ->navigationGroups([
+                NavigationGroup::make()
+                    ->label('Posts')
+                    ->icon(Heroicon::OutlinedClipboardDocumentList),
+            ])
             ->colors([
                 'primary' => Color::Amber,
             ])
