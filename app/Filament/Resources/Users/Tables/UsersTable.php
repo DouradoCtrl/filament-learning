@@ -46,7 +46,7 @@ class UsersTable
             ->filtersTriggerAction(function (Action $action) {
                 return $action->button()->label('Filtrar usuários');
             })
-            ->filtersFormWidth(Width::FourExtraLarge)
+            ->filtersFormWidth(Width::ExtraLarge)
             ->columns([
                 ImageColumn::make('avatar')
                     ->label('Avatar')

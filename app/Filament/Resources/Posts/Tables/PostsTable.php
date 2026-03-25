@@ -48,7 +48,7 @@ class PostsTable
             ->filtersTriggerAction(function (Action $action) {
                 return $action->button()->label('Filtrar posts');
             })
-            ->filtersFormWidth(Width::FourExtraLarge)
+            ->filtersFormWidth(Width::ExtraLarge)
             ->columns([
                 ImageColumn::make('thumbnail')
                     //arredondar as bordas da imagem,
@@ -121,7 +121,7 @@ class PostsTable
                     ->multiple()
                     ->searchable()
                     ->relationship('category', 'name'),
-            ], layout: FiltersLayout::AboveContentCollapsible)
+            ])
             ->recordActions([
                 ActionGroup::make([
                     ViewAction::make()
