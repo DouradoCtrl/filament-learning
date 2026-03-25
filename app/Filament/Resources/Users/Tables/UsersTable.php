@@ -102,8 +102,15 @@ class UsersTable
             ])
             ->recordActions([
                 ActionGroup::make([
-                    ViewAction::make()->icon(Heroicon::OutlinedEye)->label('Visualizar usuário'),
-                    EditAction::make()->color('primary')->icon(Heroicon::OutlinedPencil)->label('Editar usuário'),
+                    ViewAction::make()
+                        ->slideOver()
+                        ->icon(Heroicon::OutlinedEye)
+                        ->label('Visualizar usuário'),
+                    EditAction::make()
+                        ->slideOver()
+                        ->color('primary')
+                        ->icon(Heroicon::OutlinedPencil)
+                        ->label('Editar usuário'),
                     DeleteAction::make()->color('danger')->icon(Heroicon::OutlinedTrash)->label('Deletar usuário'),
                 ]),
             ])
