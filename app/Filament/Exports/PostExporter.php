@@ -6,6 +6,7 @@ use App\Models\Post;
 use Filament\Actions\Exports\ExportColumn;
 use Filament\Actions\Exports\Exporter;
 use Filament\Actions\Exports\Models\Export;
+use Filament\Forms\Components\TextInput;
 use Illuminate\Support\Number;
 
 class PostExporter extends Exporter
@@ -34,9 +35,20 @@ class PostExporter extends Exporter
                 }),
             ExportColumn::make('content')
                 ->label('Conteúdo')
-                ->words(20),
+                ->formatStateUsing(function (string $state, array $options): string {
+                    return (string) str($state)->limit($options['wordsLimit'] ?? 40);
+                }),
             ExportColumn::make('created_at')
                 ->label('Criado em'),
+        ];
+    }
+
+    public static function getOptionsFormComponents(): array
+    {
+        return [
+            TextInput::make('wordsLimit')
+                ->label('Limite de palavras para o conteúdo')
+                ->integer()
         ];
     }
 
