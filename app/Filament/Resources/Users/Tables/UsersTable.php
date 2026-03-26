@@ -22,10 +22,15 @@ use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\SelectFilter;
 use App\Models\User;
 use App\Filament\Exports\UserExporter;
+use App\Mail\DemoMail;
 use Filament\Actions\ExportAction;
 use Filament\Actions\Exports\Enums\ExportFormat;
 use Filament\Actions\Exports\Models\Export;
 use Filament\Actions\ExportBulkAction;
+use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
+use Illuminate\Support\Facades\Mail;
 
 class UsersTable
 {
@@ -33,6 +38,31 @@ class UsersTable
     {
         return $table
             ->headerActions([
+                Action::make('Enviar Email')
+                ->icon(Heroicon::OutlinedEnvelope)
+                ->modalDescription('Enviar um email para o usuário selecionado')
+                ->schema([
+                    Select::make('id')
+                        ->label('Usuário')
+                        ->required()
+                        ->options(User::pluck('name', 'id'))
+                        ->rules(['required'])
+                        ->searchable(),
+                    TextInput::make('subject')
+                        ->label('Assunto')
+                        ->required()
+                        ->rules(['required']),
+                    RichEditor::make('message')
+                        ->label('Mensagem')
+                        ->placeholder('Mensagem')
+                        ->required()
+                        ->rules(['required'])
+                        ->extraAttributes(['style' => 'min-height: 230px;'])
+                        ->columnSpanFull(),
+                ])->action(function (array $data) {
+                    $user = User::find($data['id']);
+                    Mail::to($user->email)->send(new DemoMail($data, $user));
+                })->slideOver(),
                 ExportAction::make()
                     ->label('Relatório')
                     ->icon(Heroicon::OutlinedArrowDownOnSquare)
