@@ -18,14 +18,11 @@ class ExportResource extends Resource
 {
     protected static ?string $model = Export::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowDownOnSquare;
+
+    protected static ?string $navigationLabel = 'Download Relatórios';
 
     protected static ?int $navigationSort = 4;
-
-    public static function canCreate(): bool
-    {
-        return false;
-    }
 
     public static function form(Schema $schema): Schema
     {
