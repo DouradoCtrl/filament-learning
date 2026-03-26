@@ -30,7 +30,7 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
-            ->font('Nova Square')
+            ->font('Open Sans')
             ->globalSearchKeyBindings(['command+k', 'ctrl+k'])
             ->favicon(asset('favicon.svg'))
             ->brandLogo(asset('images/logo.svg'))
