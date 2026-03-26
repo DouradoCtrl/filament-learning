@@ -34,8 +34,8 @@
                     </tr>
                     <tr>
                         <td class="content-padding" style="padding:40px 48px 20px 48px;">
-                            <h2 style="font-size:24px;color:#ffffff;font-weight:700;margin:0 0 16px 0;text-align:center;">Olá {{ $user->name }}</h2>
-                            <div style="font-size:16px;color:#d9d9d9;line-height:1.6;margin:0 0 32px 0;text-align:center;">{!! $data['message'] !!}</div>
+                            <h2 style="font-size:24px;color:#ffffff;font-weight:700;margin:0 0 16px 0;text-align:center;">Olá, {{ $userName }}</h2>
+                            <div style="font-size:16px;color:#d9d9d9;line-height:1.6;margin:0 0 32px 0;text-align:center;">{!! $userMessage !!}</div>
                         </td>
                     </tr>
                     <tr>

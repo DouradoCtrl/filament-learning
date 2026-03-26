@@ -20,8 +20,8 @@ class DemoMail extends Mailable
      * Create a new message instance.
      */
     public function __construct(
-        public array $data,
-        public User $user
+        protected array $data,
+        protected User $user
     )
     {
 
@@ -45,6 +45,10 @@ class DemoMail extends Mailable
     {
         return new Content(
             view: 'mail.demo',
+            with: [
+                'userName' => $this->user->name,
+                'userMessage' => $this->data['message']
+            ]
         );
     }
 
