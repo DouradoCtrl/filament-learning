@@ -58,9 +58,9 @@ class PostsTable
                     ->label('Título')
                     ->searchable()
                     ->wrap()
-                    ->description(function (Post $record) {
-                        return Str::of($record->content)->limit(50);
-                    })
+                    // ->description(function (Post $record) {
+                    //     return Str::of($record->content)->limit(50);
+                    // })
                     ->sortable(),
 
                 TextColumn::make('tags.tag_name')
@@ -70,7 +70,8 @@ class PostsTable
                         if (in_array($state, ['shoes', 'clothing'])) {
                             return 'success';
                         }
-                    }),
+                    })
+                    ->wrap(),
 
                 ToggleColumn::make('is_published')
                     ->label('Publicado?')
