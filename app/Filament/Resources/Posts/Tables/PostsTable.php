@@ -27,6 +27,7 @@ use App\Filament\Exports\PostExporter;
 use Filament\Actions\ExportAction;
 use Filament\Actions\Exports\Enums\ExportFormat;
 use Filament\Actions\Exports\Models\Export;
+use Filament\Actions\ExportBulkAction;
 
 class PostsTable
 {
@@ -139,6 +140,9 @@ class PostsTable
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
+                    ExportBulkAction::make()
+                        ->exporter(PostExporter::class)
+                        ->slideOver()
                 ]),
             ])->striped();
     }
