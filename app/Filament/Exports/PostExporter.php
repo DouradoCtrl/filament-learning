@@ -35,8 +35,8 @@ class PostExporter extends Exporter
                 }),
             ExportColumn::make('content')
                 ->label('Conteúdo')
-                ->formatStateUsing(function (string $state, array $options): string {
-                    return (string) str($state)->limit($options['wordsLimit'] ?? 40);
+                ->formatStateUsing(function ($state, $options): string {
+                    return str($state)->words($options['wordsLimit'] ?? 40);
                 }),
             ExportColumn::make('created_at')
                 ->label('Criado em'),
