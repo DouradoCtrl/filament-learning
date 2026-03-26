@@ -19,6 +19,9 @@ class ExportsTable
             ->columns([
                 TextColumn::make('file_name')
                     ->icon(Heroicon::OutlinedTableCells)
+                    ->url(function ($record) {
+                        return route('filament.exports.download', ['export' => $record, 'format' => 'xlsx'], absolute: false);
+                    })
                     ->label('Nome do arquivo'),
                 TextColumn::make('completed_at')
                     ->label('Exportado em')
