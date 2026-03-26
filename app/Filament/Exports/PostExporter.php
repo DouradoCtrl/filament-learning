@@ -15,11 +15,28 @@ class PostExporter extends Exporter
     public static function getColumns(): array
     {
         return [
-            ExportColumn::make('title'),
-            ExportColumn::make('content'),
-            ExportColumn::make('user.name'),
-            ExportColumn::make('category.name'),
-            ExportColumn::make('created_at'),
+            ExportColumn::make('title')
+                ->label('Título'),
+            ExportColumn::make('user.name')
+                ->label('Autor'),
+            ExportColumn::make('category.name')
+                ->label('Categoria'),
+            ExportColumn::make('tags')
+                ->label('Tags')
+                ->formatStateUsing(function ($record) {
+                    $tags = $record->tags()->pluck('tag_name')->toArray();
+                    return empty($tags) ? 'No tags' : implode(', ', $tags);
+                }),
+            ExportColumn::make('is_published')
+                ->label('Publicado?')
+                ->formatStateUsing(function ($state) {
+                    return $state ? 'Sim' : 'Não';
+                }),
+            ExportColumn::make('content')
+                ->label('Conteúdo')
+                ->words(20),
+            ExportColumn::make('created_at')
+                ->label('Criado em'),
         ];
     }
 
