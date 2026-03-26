@@ -25,6 +25,7 @@ use App\Filament\Exports\UserExporter;
 use Filament\Actions\ExportAction;
 use Filament\Actions\Exports\Enums\ExportFormat;
 use Filament\Actions\Exports\Models\Export;
+use Filament\Actions\ExportBulkAction;
 
 class UsersTable
 {
@@ -133,6 +134,10 @@ class UsersTable
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
+                    ExportBulkAction::make()
+                        ->label('Exportar Usuários')
+                        ->exporter(UserExporter::class)
+                        ->slideOver()
                 ]),
         ])->striped();
     }
