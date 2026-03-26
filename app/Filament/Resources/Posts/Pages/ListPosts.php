@@ -48,7 +48,9 @@ class ListPosts extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make()->slideOver(),
+            CreateAction::make()
+                ->label('Criar publicação')
+                ->slideOver(),
         ];
     }
 }
