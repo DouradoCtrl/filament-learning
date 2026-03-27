@@ -1,19 +1,25 @@
 # Use postgres/example user/password credentials
 
 services:
-
   db:
-    image: postgres
+    image: postgres:18.3-alpine
     restart: always
     shm_size: 128mb
     environment:
       POSTGRES_PASSWORD: filament-secret
       POSTGRES_USER: filament
       POSTGRES_DB: filament
+    volumes:
+      - .docker/db/data:/var/lib/postgresql
+      - .docker/db/sql:/docker-entrypoint-initdb.d
     ports:
       - 5432:5432
 
-
+  mail:
+    image: axllent/mailpit
+    ports:
+      - 8025:8025
+      - 1025:1025
 
   adminer:
     image: adminer
