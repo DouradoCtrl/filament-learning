@@ -62,22 +62,7 @@ class UsersTable
                         ->columnSpanFull(),
                 ])->action(function (array $data) {
                     $user = User::find($data['id']);
-                    try {
-                        Mail::to($user->email)->send(new DemoMail($data, $user));
-                        Notification::make()
-                            ->success()
-                            ->duration(3000)
-                            ->title('Email enviado para ' . $user->name)
-                            ->body('Email enviado para usuário')
-                            ->send();
-                    } catch (\Throwable $th) {
-                        Notification::make()
-                            ->danger()
-                            ->duration(3000)
-                            ->title('Erro ao enviar email para ' . $user->name)
-                            ->body('Ocorreu um erro ao enviar o email para o usuário')
-                            ->send();
-                    }
+                    $user->sendEmail($data);
                 })->slideOver(),
                 ExportAction::make()
                     ->label('Relatório')
@@ -185,22 +170,7 @@ class UsersTable
                                 ->extraAttributes(['style' => 'min-height: 230px;'])
                                 ->columnSpanFull(),
                         ])->action(function (array $data, User $record) {
-                            try {
-                                Mail::to($record->email)->send(new DemoMail($data, $record));
-                                Notification::make()
-                                    ->success()
-                                    ->duration(3000)
-                                    ->title('Email enviado para ' . $record->name)
-                                    ->body('Email enviado para usuário')
-                                    ->send();
-                            } catch (\Throwable $th) {
-                                Notification::make()
-                                    ->danger()
-                                    ->duration(3000)
-                                    ->title('Erro ao enviar email para ' . $record->name)
-                                    ->body('Ocorreu um erro ao enviar o email para o usuário')
-                                    ->send();
-                            }
+                            $record->sendEmail($data);
                         }),
                     EditAction::make()
                         ->slideOver()

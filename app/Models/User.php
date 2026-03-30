@@ -12,6 +12,9 @@ use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Filament\Panel;
+use Filament\Notifications\Notification;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\DemoMail;
 // use Illuminate\Support\Facades\Storage;
 // use Illuminate\Support\Str;
 //implements HasAvatar
@@ -48,6 +51,25 @@ class User extends Authenticatable
     public function replies()
     {
         return $this->hasMany(Reply::class);
+    }
+
+    public function sendEmail(array $data) {
+        try {
+            Mail::to($this->email)->send(new DemoMail($data, $this));
+            Notification::make()
+                ->success()
+                ->duration(3000)
+                ->title('Email enviado para ' . $this->name)
+                ->body('Email enviado para usuário')
+                ->send();
+        } catch (\Throwable $th) {
+            Notification::make()
+                ->danger()
+                ->duration(3000)
+                ->title('Erro ao enviar email para ' . $this->name)
+                ->body('Ocorreu um erro ao enviar o email para o usuário')
+                ->send();
+        }
     }
 
     // public function getFilamentAvatarUrl(): ?string
