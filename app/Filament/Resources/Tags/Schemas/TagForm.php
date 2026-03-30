@@ -12,6 +12,7 @@ class TagForm
         return $schema
             ->components([
                 TextInput::make('tag_name')
+                    ->label('Nome')
                     ->required(),
             ]);
     }
