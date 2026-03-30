@@ -21,6 +21,7 @@ class CategoryResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?int $navigationSort = 2;
+    protected static ?string $modelLabel = 'Categoria';
 
     protected static ?string $recordTitleAttribute = 'Category';
 
@@ -45,8 +46,8 @@ class CategoryResource extends Resource
     {
         return [
             'index' => ListCategories::route('/'),
-            'create' => CreateCategory::route('/create'),
-            'edit' => EditCategory::route('/{record}/edit'),
+            // 'create' => CreateCategory::route('/create'),
+            // 'edit' => EditCategory::route('/{record}/edit'),
         ];
     }
 }
