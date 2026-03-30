@@ -153,6 +153,24 @@ class UsersTable
                         ->slideOver()
                         ->icon(Heroicon::OutlinedEye)
                         ->label('Visualizar usuário'),
+                    Action::make('Enviar Email Cliente')
+                        ->label('Enviar Email')
+                        ->icon(Heroicon::OutlinedEnvelopeOpen)
+                        ->schema([
+                            TextInput::make('subject')
+                            ->label('Assunto')
+                            ->required()
+                            ->rules(['required']),
+                            RichEditor::make('message')
+                                ->label('Mensagem')
+                                ->placeholder('Mensagem')
+                                ->required()
+                                ->rules(['required'])
+                                ->extraAttributes(['style' => 'min-height: 230px;'])
+                                ->columnSpanFull(),
+                        ])->action(function (array $data, User $record) {
+                            Mail::to($record->email)->send(new DemoMail($data, $record));
+                        }),
                     EditAction::make()
                         ->slideOver()
                         ->color('primary')
