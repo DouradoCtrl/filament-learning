@@ -18,7 +18,7 @@ return new class extends Migration
             $table->id();
             $table->string('tag_name', 100);
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->timestamp('updated_at')->onUpdate('current_timestamp');
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
 
         Schema::enableForeignKeyConstraints();
