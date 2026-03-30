@@ -19,11 +19,11 @@ class ReplyResource extends Resource
 {
     protected static ?string $model = Reply::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowPathRoundedSquare;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedChatBubbleLeftRight;
     protected static ?int $navigationSort = 3;
 
+    protected static ?string $modelLabel = 'Respostas';
     protected static string | UnitEnum | null $navigationGroup = 'Posts';
-
     protected static ?string $navigationLabel = 'Respostas';
 
     protected static ?string $recordTitleAttribute = 'Reply';

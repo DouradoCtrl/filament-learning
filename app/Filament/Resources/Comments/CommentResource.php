@@ -19,11 +19,11 @@ class CommentResource extends Resource
 {
     protected static ?string $model = Comment::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedChatBubbleLeftRight;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedChatBubbleBottomCenter;
     protected static ?int $navigationSort = 2;
 
+    protected static ?string $modelLabel = 'Comentários';
     protected static string | UnitEnum | null $navigationGroup = 'Posts';
-
     protected static ?string $navigationLabel = 'Comentários';
 
     protected static ?string $recordTitleAttribute = 'Comment';
