@@ -30,6 +30,7 @@ use Filament\Actions\ExportBulkAction;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Notifications\Notification;
 use Illuminate\Support\Facades\Mail;
 
 class UsersTable
@@ -61,7 +62,22 @@ class UsersTable
                         ->columnSpanFull(),
                 ])->action(function (array $data) {
                     $user = User::find($data['id']);
-                    Mail::to($user->email)->send(new DemoMail($data, $user));
+                    try {
+                        Mail::to($user->email)->send(new DemoMail($data, $user));
+                        Notification::make()
+                            ->success()
+                            ->duration(3000)
+                            ->title('Email enviado para ' . $user->name)
+                            ->body('Email enviado para usuário')
+                            ->send();
+                    } catch (\Throwable $th) {
+                        Notification::make()
+                            ->danger()
+                            ->duration(3000)
+                            ->title('Erro ao enviar email para ' . $user->name)
+                            ->body('Ocorreu um erro ao enviar o email para o usuário')
+                            ->send();
+                    }
                 })->slideOver(),
                 ExportAction::make()
                     ->label('Relatório')
@@ -169,7 +185,22 @@ class UsersTable
                                 ->extraAttributes(['style' => 'min-height: 230px;'])
                                 ->columnSpanFull(),
                         ])->action(function (array $data, User $record) {
-                            Mail::to($record->email)->send(new DemoMail($data, $record));
+                            try {
+                                Mail::to($record->email)->send(new DemoMail($data, $record));
+                                Notification::make()
+                                    ->success()
+                                    ->duration(3000)
+                                    ->title('Email enviado para ' . $record->name)
+                                    ->body('Email enviado para usuário')
+                                    ->send();
+                            } catch (\Throwable $th) {
+                                Notification::make()
+                                    ->danger()
+                                    ->duration(3000)
+                                    ->title('Erro ao enviar email para ' . $record->name)
+                                    ->body('Ocorreu um erro ao enviar o email para o usuário')
+                                    ->send();
+                            }
                         }),
                     EditAction::make()
                         ->slideOver()
